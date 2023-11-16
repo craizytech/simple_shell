@@ -46,13 +46,9 @@ int main(int argc, char const *argv[], char **envp)
 				exit(EXIT_FAILURE);
 			}
 			else
-			{
-				/*free(executable_path);*/
 				wait(NULL);
-			}
 		}
 		free(buff);
 	}
-
 	return (EXIT_SUCCESS);
 }
