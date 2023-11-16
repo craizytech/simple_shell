@@ -11,32 +11,25 @@
 int main(int argc, char const *argv[], char **envp)
 {
 	char *buff, *args_arr[MAX_ARGS];
-	char *path_var, *executable_path;
+	char *executable_path, *path[MAX_ARGS];
 	size_t buffSize = BUFF_SIZE, characters;
 	pid_t pid;
 
 	(void) argc;
 	(void) argv;
-
 	buff = create_buff();
-
 	if (isatty(STDIN_FILENO) == 0)
-	{
 		return (EXIT_FAILURE);
-	}
-
 	while (1)
 	{
 		printf("$ ");
 		characters = getline(&buff, &buffSize, stdin);
-
 		if (characters == 0)
 			continue;
-
 		remove_new_line(buff);
-		printf("Checkpoint **");
 		tokenize_str(buff, args_arr, MAX_ARGS);
-		executable_path = initialize_path(path_var, path, args_arr);
+		executable_path = initialize_path(path, args_arr);
+		printf("%s\n", executable_path);
 		if (executable_path != NULL)
 		{
 			pid = fork();
@@ -52,12 +45,14 @@ int main(int argc, char const *argv[], char **envp)
 				perror("Execve failure");
 				exit(EXIT_FAILURE);
 			}
-			free(executable_path);
-			wait(NULL);
+			else
+			{
+				/*free(executable_path);*/
+				wait(NULL);
+			}
 		}
-		run_code(args_arr, envp, pid);
+		free(buff);
 	}
-	free(buff);
 
 	return (EXIT_SUCCESS);
 }

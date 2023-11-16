@@ -24,6 +24,6 @@ int _putchar(char c);
 char *create_buff();
 char *strdup_static(const char *str);
 void remove_new_line(char *str);
-char *initialize_path(char *path_var, char *path[], char *str_arr[]);
+char *initialize_path(char *path[], char *str_arr[]);
 
 #endif

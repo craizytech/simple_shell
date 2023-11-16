@@ -47,6 +47,8 @@ char *_strcpy(char *dest, const char *src)
 void tokenize_str(const char *str, char *str_arr[], int max)
 {
 	char *str_copy = _strcpy((char *)malloc(strlen(str) + 1), str);
+	char delim[] = " ", *token;
+	int i, token_count;
 
 	if (str_copy == NULL)
 	{
@@ -54,9 +56,8 @@ void tokenize_str(const char *str, char *str_arr[], int max)
 		return;
 	}
 
-	char delim[] = " ";
-	char *token = strtok(str_copy, delim);
-	int token_count = 0;
+	token = strtok(str_copy, delim);
+	token_count = 0;
 
 	while (token != NULL && token_count < max)
 	{
@@ -71,7 +72,7 @@ void tokenize_str(const char *str, char *str_arr[], int max)
 		token_count++;
 	}
 
-	for (int i = token_count; i < max; i++)
+	for (i = token_count; i < max; i++)
 		str_arr[i] = NULL;
 
 	free(str_copy);

@@ -38,10 +38,10 @@ void remove_new_line(char *str)
  * @path: the path
  * Return: a pointer to the full path created
 */
-char *initialize_path(char *path_var, char *path[], char *str_arr[])
+char *initialize_path(char *path[], char *str_arr[])
 {
 	size_t i = 0;
-	char *executable_path, *path[MAX_ARGS];
+	char *executable_path, *path_var;
 
 	path_var = getenv("PATH");
 	if (!path_var)
